@@ -2,7 +2,7 @@
 
 A lightweight, efficient neural network library implemented in C++. This library provides a clean, object-oriented approach to building and training neural networks from scratch.
 
-## 📁 Detailed File Structure
+## → Detailed File Structure
 
 ```
 Neural_Network_Library_CPP/
@@ -26,7 +26,7 @@ Neural_Network_Library_CPP/
 └── README.md                      # This documentation
 ```
 
-## 🛠️ Installation
+## → Installation
 
 ### Prerequisites
 
@@ -62,7 +62,7 @@ This project uses the MNIST dataset for training and testing. Download the CSV f
    └── ...
    ```
 
-## 📊 Performance & Capabilities
+## → Performance & Capabilities
 
 ### Supported Architectures
 - **Dense Networks**: Fully connected layers with any activation
@@ -82,7 +82,7 @@ This project uses the MNIST dataset for training and testing. Download the CSV f
 - **Memory Efficiency**: In-place operations where possible
 - **4D Support**: Native support for batch processing
 
-## 🧠 Core Components Explained
+## → Core Components Explained
 
 ### Tensor.cpp - Custom 4D Tensor Implementation
 - **4D Tensor Structure**: (batch, channels, height, width) for both images and dense data
@@ -151,7 +151,7 @@ Complete implementation with forward and backward passes:
 - **Automatic Selection**: Chooses best method per activation
 - **Statistical Properties**: Maintains proper variance scaling
 
-## 🤝 Contributing
+## → Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
@@ -171,11 +171,11 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 - Ensure code compiles without warnings
 - Test your changes with MNIST dataset
 
-## 📞 Contact
+## → Contact
 
 - **GitHub**: [Dora-The-Explorer-Is-Dead](https://github.com/Dora-The-Explorer-Is-Dead)
 - **Project Link**: [Neural_Network_Library_CPP](https://github.com/Dora-The-Explorer-Is-Dead/Neural_Network_Library_CPP)
 
 ---
 
-**Happy Neural Networking! 🧠✨**
+**Happy Neural Networking!**
