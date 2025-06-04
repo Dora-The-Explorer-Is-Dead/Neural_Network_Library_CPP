@@ -58,8 +58,7 @@ make
 This project uses the MNIST dataset for training and testing. Download the CSV files:
 
 1. **Download MNIST CSV files:**
-   - [mnist_train.csv](http://www.pjreddie.com/media/files/mnist_train.csv) (~109 MB)
-   - [mnist_test.csv](http://www.pjreddie.com/media/files/mnist_test.csv) (~18 MB)
+   - https://www.kaggle.com/datasets/oddrationale/mnist-in-csv?resource=download
 
 2. **Place them in the project root directory:**
    ```
