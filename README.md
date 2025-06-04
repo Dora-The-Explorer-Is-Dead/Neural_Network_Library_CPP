@@ -1,18 +1,6 @@
 # Neural Network Library C++
 
-A lightweight, efficient neural network library implemented in C++ for educational and research purposes. This library provides a clean, object-oriented approach to building and training neural networks from scratch.
-
-## 🚀 Features
-
-- **Complete Deep Learning Framework** - From tensors to training algorithms
-- **Modular Layer System** - Easy to combine layers for custom architectures
-- **CNN Support** - Full convolutional neural network implementation with im2col optimization
-- **Modern Techniques** - Batch normalization, dropout, multiple optimizers
-- **4D Tensor Operations** - Efficient broadcasting and matrix operations
-- **Memory Optimized** - Move semantics and efficient data access patterns
-- **Type Safety** - Strong C++ typing with comprehensive error checking
-- **Educational Focus** - Clean, readable code perfect for learning implementations
-- **Production Ready** - Optimized algorithms suitable for real applications
+A lightweight, efficient neural network library implemented in C++. This library provides a clean, object-oriented approach to building and training neural networks from scratch.
 
 ## 📁 Detailed File Structure
 
@@ -73,8 +61,7 @@ make
 This project uses the MNIST dataset for training and testing. Download the CSV files:
 
 1. **Download MNIST CSV files:**
-   - [mnist_train.csv](http://www.pjreddie.com/media/files/mnist_train.csv) (~109 MB)
-   - [mnist_test.csv](http://www.pjreddie.com/media/files/mnist_test.csv) (~18 MB)
+   - https://www.kaggle.com/datasets/oddrationale/mnist-in-csv?resource=download
 
 2. **Place them in the project root directory:**
    ```
@@ -83,136 +70,6 @@ This project uses the MNIST dataset for training and testing. Download the CSV f
    ├── mnist_test.csv
    └── ...
    ```
-
-3. **Alternative: Use the download script (if available):**
-   ```bash
-   python download_data.py
-   ```
-
-## 🔧 Usage
-
-## 🔧 Usage Examples
-
-### Basic Dense Network for MNIST
-
-```cpp
-#include "Dense_Layer.hpp"
-#include "Activation.hpp"
-#include "Loss.hpp"
-#include "Optimizer.hpp"
-
-int main() {
-    // Create network layers
-    DenseLayer layer1(784, 128, ActivationType::RELU, "hidden1");
-    DenseLayer layer2(128, 64, ActivationType::RELU, "hidden2");
-    DenseLayer output_layer(64, 10, ActivationType::RELU, "output");
-    
-    // Create optimizer
-    Optimizer optimizer = create_adam(0.001);
-    
-    // Training loop (simplified)
-    for (int epoch = 0; epoch < 100; epoch++) {
-        // Forward pass
-        Tensor h1 = layer1.forward(input_batch);
-        Tensor h1_activated = Activation::forward(h1, ActivationType::RELU);
-        
-        Tensor h2 = layer2.forward(h1_activated);
-        Tensor h2_activated = Activation::forward(h2, ActivationType::RELU);
-        
-        Tensor output = output_layer.forward(h2_activated);
-        Tensor predictions = Activation::forward(output, ActivationType::SOFTMAX);
-        
-        // Compute loss
-        double loss = Loss::forward(predictions, targets, LossType::CROSS_ENTROPY);
-        
-        // Backward pass
-        Tensor grad = Loss::backward(predictions, targets, LossType::CROSS_ENTROPY);
-        grad = Activation::backward(output, grad, ActivationType::SOFTMAX);
-        
-        grad = output_layer.backward(grad);
-        grad = Activation::backward(h2, grad, ActivationType::RELU);
-        
-        grad = layer2.backward(grad);
-        grad = Activation::backward(h1, grad, ActivationType::RELU);
-        
-        layer1.backward(grad);
-        
-        // Update weights
-        optimizer.update(layer1.get_weights(), layer1.get_weight_gradients());
-        optimizer.update(layer2.get_weights(), layer2.get_weight_gradients());
-        optimizer.update(output_layer.get_weights(), output_layer.get_weight_gradients());
-    }
-    
-    return 0;
-}
-```
-
-### Convolutional Neural Network
-
-```cpp
-#include "Conv2D_Layer.hpp"
-#include "Pooling.hpp"
-#include "Flatten.hpp"
-#include "Batch_Normalization.hpp"
-
-int main() {
-    // CNN Architecture: Conv -> BatchNorm -> Pool -> Flatten -> Dense
-    Conv2DLayer conv1(1, 32, 3, 1, ActivationType::RELU, "conv1");           // 1 -> 32 channels, 3x3 kernel
-    BatchNormalization bn1(32, BatchNormType::CONV2D, 1e-5, 0.9, "bn1");
-    PoolingLayer pool1(PoolingType::MAX, 2, 2, "pool1");                     // 2x2 max pooling
-    
-    Conv2DLayer conv2(32, 64, 3, 1, ActivationType::RELU, "conv2");          // 32 -> 64 channels
-    BatchNormalization bn2(64, BatchNormType::CONV2D, 1e-5, 0.9, "bn2");
-    PoolingLayer pool2(PoolingType::MAX, 2, 2, "pool2");
-    
-    FlattenLayer flatten("flatten");
-    DenseLayer fc1(64 * 7 * 7, 128, ActivationType::RELU, "fc1");           // Assuming 28x28 input -> 7x7 after pooling
-    DropoutLayer dropout(DropoutRate::MODERATE, "dropout");
-    DenseLayer fc2(128, 10, ActivationType::RELU, "output");
-    
-    // Training mode
-    bn1.set_training(true);
-    bn2.set_training(true);
-    dropout.set_training(true);
-    
-    // Forward pass
-    Tensor x = conv1.forward(input);
-    x = Activation::forward(x, ActivationType::RELU);
-    x = bn1.forward(x);
-    x = pool1.forward(x);
-    
-    x = conv2.forward(x);
-    x = Activation::forward(x, ActivationType::RELU);
-    x = bn2.forward(x);
-    x = pool2.forward(x);
-    
-    x = flatten.forward(x);
-    x = fc1.forward(x);
-    x = Activation::forward(x, ActivationType::RELU);
-    x = dropout.forward(x);
-    
-    x = fc2.forward(x);
-    Tensor predictions = Activation::forward(x, ActivationType::SOFTMAX);
-    
-    return 0;
-}
-```
-
-### Custom Weight Initialization
-
-```cpp
-#include "Initializer_Weights_Biases.hpp"
-
-// Automatic initialization based on activation
-DenseLayer layer(784, 128, ActivationType::RELU, "layer1");  // Uses He initialization
-
-// Manual initialization
-DenseLayer custom_layer(128, 64, InitializationType::XAVIER_NORMAL, "custom");
-
-// Initialize tensors directly
-Tensor weights(1, 1, 784, 128);
-Initializer_Weights_Biases::initialize(weights, InitializationType::HE_NORMAL, 784, 128);
-```
 
 ## 📊 Performance & Capabilities
 
@@ -240,24 +97,7 @@ Initializer_Weights_Biases::initialize(weights, InitializationType::HE_NORMAL, 7
 - **Memory Efficiency**: In-place operations where possible
 - **4D Support**: Native support for batch processing
 
-## 🧪 Examples
-
-The `main/` directory contains several example programs:
-
-- `main.cpp` - Basic MNIST training example
-- `network_demo.cpp` - Demonstrates different network architectures
-- `data_visualization.cpp` - Visualizes training progress and results
-
-To run examples:
-```bash
-cd main
-g++ -O2 -std=c++11 -I../include main.cpp ../src/*.cpp -o example
-./example
-```
-
-## 🏗️ Architecture
-
-## 🧠 Core Components Explained
+## Core Components Explained
 
 ### Tensor.cpp - Custom 4D Tensor Implementation
 Your library's foundation featuring:
