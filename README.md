@@ -347,16 +347,6 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 - Ensure code compiles without warnings
 - Test your changes with MNIST dataset
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🙏 Acknowledgments
-
-- **MNIST Database** - Yann LeCun, Corinna Cortes, and Christopher J.C. Burges
-- **Educational Resources** - Various online tutorials and academic papers on neural networks
-- **Community** - Thanks to all contributors and users providing feedback
-
 ## 📞 Contact
 
 - **GitHub**: [Dora-The-Explorer-Is-Dead](https://github.com/Dora-The-Explorer-Is-Dead)
