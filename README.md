@@ -100,7 +100,6 @@ This project uses the MNIST dataset for training and testing. Download the CSV f
 ## 🧠 Core Components Explained
 
 ### Tensor.cpp - Custom 4D Tensor Implementation
-Your library's foundation featuring:
 - **4D Tensor Structure**: (batch, channels, height, width) for both images and dense data
 - **Matrix Operations**: Optimized matrix multiplication with broadcasting
 - **Element-wise Operations**: Addition, subtraction, multiplication, division
