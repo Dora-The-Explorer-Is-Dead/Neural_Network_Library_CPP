@@ -34,11 +34,10 @@ Neural_Network_Library_CPP/
   - GCC 4.8+ on Linux
   - MSVC 2015+ on Windows
   - Clang 3.4+ on macOS
-- **CMake** (optional, for build automation)
 
 ### Building the Project
 
-#### Option 1: Using g++
+#### Using g++
 ```bash
 # Clone the repository
 git clone https://github.com/Dora-The-Explorer-Is-Dead/Neural_Network_Library_CPP.git
@@ -46,14 +45,6 @@ cd Neural_Network_Library_CPP
 
 # Compile example programs
 g++ -O2 -std=c++11 -I./include main/main.cpp src/*.cpp -o neural_network_demo
-```
-
-#### Option 2: Using CMake (if CMakeLists.txt available)
-```bash
-mkdir build
-cd build
-cmake ..
-make
 ```
 
 ### Dataset Setup
