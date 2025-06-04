@@ -85,12 +85,6 @@ This project uses the MNIST dataset for training and testing. Download the CSV f
 - **Adam**: Adaptive learning rates with first and second moment estimates
 - **RMSprop**: Adaptive learning rate scaling
 
-### Typical MNIST Performance
-- **Dense Network (784→128→64→10)**: ~96-98% accuracy
-- **CNN Architecture**: ~98-99% accuracy with proper configuration
-- **Training Time**: 5-15 minutes on modern CPU (depending on architecture)
-- **Memory Usage**: ~100-500 MB during training (depends on batch size)
-
 ### Tensor Operations
 - **Broadcasting**: Automatic dimension handling for operations
 - **Matrix Multiplication**: Optimized BLAS-style implementations
